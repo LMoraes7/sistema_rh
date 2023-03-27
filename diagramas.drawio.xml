@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-03-27T18:20:37.774Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" etag="_mqW_iT6-aCZu8cCKnMj" version="21.1.1" type="device" pages="3">
+<mxfile host="app.diagrams.net" modified="2023-03-27T18:23:03.934Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" etag="KGs7kI3pHOAhPpKEac1O" version="21.1.1" type="device" pages="3">
   <diagram name="RH - sistema de recrutamento" id="LNeWXbB5bKsX1skuzuAL">
     <mxGraphModel dx="2427" dy="1802" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -388,7 +388,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="_kQh33iQcA9V-dW01AEE" name="RH - sistema de controle de ponto ">
-    <mxGraphModel dx="1600" dy="633" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2427" dy="633" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -474,6 +474,16 @@
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="310" y="660" as="sourcePoint" />
             <mxPoint x="430" y="550" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gk2imTElhCAE5QunpJaY-1" value="" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="qQ5SRfQYH56NEYMi_Yjs-6" target="bHJuTrGruLn_CQbgbAHw-3">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="70" y="750" as="sourcePoint" />
+            <mxPoint x="120" y="700" as="targetPoint" />
+            <Array as="points">
+              <mxPoint y="760" />
+              <mxPoint y="580" />
+            </Array>
           </mxGeometry>
         </mxCell>
       </root>
