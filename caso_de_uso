@@ -1,94 +1,109 @@
 Caso de uso: Agendar reunião
-Objetivo: Agendar uma reunião com os funcionários, caso seja uma reunião de trabalho, ou agendar uma reunião com um candidato caso seja para entrevistá-lo.
+Objetivo: Agendar uma reunião com uns funcionários ou com um candidato.
+
 Pré-condições: O organizador da reunião deverá ser um funcionário.
 Pós-condição: A reunião contendo a lista de convidados e o instante do início e término da reunião, se encontrará armazenada na base de dados.
+
 Cenário de sucesso principal:
 1) O funcionário ao desejar criar uma reunião, deve informar a data e hora de seu início e término, a descrição da reunião e uma lista contendo os e-mail's dos convidados dessa reunião.
-2) O sistema recebe o pedido do funcionário, valida se essa solicitação possui entradas válidas como a data e hora de ínicio e término devem ser no futuro, a data de início deve ser menor do que a data de término, a descrição veio preenchida e se contém texto e se caso sejam informados e-mail's de convidados, esses e-mail's devem possuir formato válido,
-3) O sistema verifica se os e-mail's que foram informados, pertencem a alguma entidade cadastrada no sistema.
-4) O sistema armazena na base de dados a agenda informando que as data de início e término, a descrição, e os convidados são as que o fucionário informou,
-5) O sistema dispara e-mail's para todos os convidados daquela reunião informando que eles foram convidados,
+2) O sistema recebe o pedido do funcionário, valida se essa solicitação possui entradas válidas como a data e hora de ínicio e término devem ser no futuro, a data de início deve ser menor do que a data de término, a descrição veio preenchida e se contém texto e se caso sejam informados e-mail's de convidados, esses e-mail's devem possuir formato válido.
+3) O sistema verifica se os e-mail's que foram informados, pertencem a alguma entidade (funcionario ou candidato) cadastrada no sistema.
+4) O sistema armazena na base de dados a agenda informando as data de início e término, a descrição, e os convidados que o fucionário organizador informou.
+5) O sistema dispara e-mail's para todos os convidados daquela reunião informando que eles foram convidados.
 6) O sistema retorna uma resposta bem sucedida para o funcionário informando que aquela agenda foi criada, enviando junto na resposta o identificador que foi gerado para aquela reunião.
+
 Fluxo Alternativo 1:
 Caso o funcionário não informe os dados em uma forma válida, o sistema irá retornar uma resposta de erro com uma mensagem amigável informando como os dados devem ser preenchidos.
 Fluxo Alternativo 2:
-Caso o funcionário informe algum e-mail que não pertença a nenhum candidato ou outro funcionário, o sistema irá retornar uma resposta de erro com uma mensagem amigável informando que ele convidou pessoas de fora organização.
+Caso o funcionário informe algum e-mail que não pertença a nenhuma entidade, o sistema irá retornar uma resposta de erro com uma mensagem amigável informando que ele informou e-mail's inválidos.
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Caso de uso: Cancelar reunião
-Objetivo: Cancelar uma reunião com os funcionários, caso seja uma reunião de trabalho, ou cancelar uma reunião com um candidato caso seja para entrevistá-lo.
-Pré-condições: A reunião a ser cancelada deve exister na base de dados. O funcionário que irá cancelar a reunião, deve ser o criador da mesma.
+Objetivo: Cancelar uma reunião com funcionários ou com um candidato.
+
+Pré-condições: A reunião a ser cancelada deve exister na base de dados. O funcionário que irá cancelar a reunião deve ser o organizador da mesma.
 Pós-condição: A reunião será cancelada e seu status será atualizado na base de dados.
+
 Cenário de sucesso principal:
-1) O funcionário ao desejar cancelar uma reunião, deve informar o identificador da reunião.
-2) O sistema recebe o pedido do funcionário, e valida se aquele identificador possui um formato válido para o padrão de identificadores.
-3) O sistema verifica se aquele identificador pertence para alguma reunião cadastrada na base de dados.
-4) O sistema verifica se o funcionário que solicitou o cancelamento da reunião é o organizador da mesma.
+1) O funcionário ao desejar cancelar uma reunião deve informar o identificador da agenda.
+2) O sistema recebe o pedido do funcionário e valida se aquele identificador possui um formato válido para o padrão de identificadores de agendas.
+3) O sistema verifica se aquele identificador pertence a alguma agenda cadastrada na base de dados.
+4) O sistema verifica se o funcionário que solicitou o cancelamento da reunião é o organizador da agenda.
 5) O sistema atualiza o status da reunião para cancelada na base de dados.
-6) O sistema dispara e-mail's para todos os convidados daquela reunião informando que ela foi cancelada.
+6) O sistema dispara e-mail's para todos os convidados daquela agenda informando que a reunião foi cancelada.
 7) O sistema retorna uma resposta bem sucedida para o cliente informando que aquela agenda foi cancelada.
+
 Fluxo Alternativo 1:
 Caso o funcionário não informe os dados em uma forma válida, o sistema irá retornar uma resposta de erro com uma mensagem amigável informando como os dados devem ser preenchidos.
 Fluxo Alternativo 2:
-Caso o funcionário informe um identificador que não pertença a nenhuma agenda, o sistema irá retornar uma resposta de erro com uma mensagem amigável relatando que ele informou um identificador que possui relação com nenhuma agenda.
+Caso o funcionário informe um identificador que não pertença a nenhuma agenda, o sistema irá retornar uma resposta de erro com uma mensagem amigável relatando que ele informou um identificador que não possui relação com nenhuma agenda.
 Fluxo Alternativo 3:
 Caso o funcionário tente cancelar uma agenda onde ele não é o organizador da mesma, o sistema irá retornar uma resposta de erro com uma mensagem amigável relatando que ele não possui permissão para cancelar a agenda referenciada pelo identificador informado.
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Caso de uso: Responder presença
-Objetivo: Responder a presença em uma reunião com os funcionários, caso seja uma reunião de trabalho, ou uma reunião com um candidato caso seja para entrevistá-lo.
-Pré-condições: A reunião deve exister na base de dados. O funcionário ou o candidato que irá responder sua presença, deve ser um convidado da reunião.
-Pós-condição: A resposta da presença será atualizado na base de dados.
+Objetivo: Responder a presença em uma reunião com os funcionários ou com um candidato.
+
+Pré-condições: A reunião deve exister na base de dados. O funcionário ou o candidato que irá responder sua presença deve ser um convidado da agenda.
+Pós-condição: A resposta da presença será atualizada na base de dados.
+
 Cenário de sucesso principal:
-1) O funcionário ou candidato ao desejar responder sua presença, deve informar o identificador da reunião junto com a resposta se ele irá participar da mesma.
-2) O sistema recebe a solicitação do cliente e valida se aquele identificador possui um formato válido para o padrão de identificadores e se a resposta da presença possui um valor de falso ou verdadeiro.
+1) O funcionário ou candidato ao desejar responder sua presença deve informar o identificador da reunião junto com a resposta se ele irá participar da agenda.
+2) O sistema recebe a solicitação do solicitante e valida se aquele identificador possui um formato válido para o padrão de identificadores de agenda e se a resposta da presença possui um valor de falso ou verdadeiro.
 3) O sistema verifica se aquele identificador pertence para alguma reunião cadastrada na base de dados.
-4) O sistema verifica se o cliente que solicitou a resposta presença da reunião pertence a lista de convidados da mesma.
-5) O sistema atualiza o status presença do cliente na base de dados.
-6) O sistema dispara e-mail para o organizador daquela reunião informando que o convidado XPTO deu a resposta dele em relação a presença.
-7) O sistema retorna uma resposta bem sucedida para o cliente informando que aquela a resposta dele foi registrada com sucesso.
+4) O sistema verifica se o solicitante que informou a resposta de presença na agenda pertence a lista de convidados da reunião.
+5) O sistema atualiza o status da presença do convidado na base de dados.
+6) O sistema dispara e-mail para o organizador daquela reunião informando que o convidado XPTO informou a resposta dele em relação a presença.
+7) O sistema retorna uma resposta bem sucedida para o solicitante informando que a resposta dele foi registrada com sucesso.
+
 Fluxo Alternativo 1:
-Caso o funcionário não informe os dados em uma forma válida, o sistema irá retornar uma resposta de erro com uma mensagem amigável informando como os dados devem ser preenchidos.
+Caso o funcionário ou candidato não informe os dados em uma forma válida, o sistema irá retornar uma resposta de erro com uma mensagem amigável informando como os dados devem ser preenchidos.
 Fluxo Alternativo 2:
-Caso o funcionário ou cliente informe um identificador que não pertença a nenhuma agenda, o sistema irá retornar uma resposta de erro com uma mensagem amigável relatando que ele informou um identificador que possui relação com nenhuma agenda.
+Caso o funcionário ou candidato informe um identificador que não pertença a nenhuma agenda, o sistema irá retornar uma resposta de erro com uma mensagem amigável relatando que o solicitante informou um identificador que não possui relação com nenhuma agenda.
 Fluxo Alternativo 3:
-Caso o funcionário ou cliente tente responder presença em uma reunião onde ele não é um convidado, o sistema irá retornar uma resposta de erro com uma mensagem amigável relatando que ele informou um identificador de agenda onde ele não está na lista de convidados.
+Caso o funcionário ou candidato tente responder presença em uma reunião onde ele não é um convidado, o sistema irá retornar uma resposta de erro com uma mensagem amigável relatando que o solicitante informou um identificador de agenda onde ele não está na lista de convidados.
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Caso de uso: Remarcar reunião
-Objetivo: Remarcar uma reunião com os funcionários, caso seja uma reunião de trabalho, ou uma reunião com um candidato caso seja para entrevistá-lo.
-Pré-condições: A reunião deve exister na base de dados. O funcionário que irá remarcar a reunião, deve ser o criador da mesma.
+Objetivo: Remarcar uma reunião com os funcionários ou com um candidato.
+
+Pré-condições: A reunião deve exister na base de dados. O funcionário que irá remarcar a reunião deve ser o criador da agenda.
 Pós-condição: A nova data da reunião será atualizada na base de dados.
+
 Cenário de sucesso principal:
-1) O funcionário ao desejar remarcar uma reunião deve informar o identificador da reunião junto com as novas datas de ínicios e término da reunião.
-2) O sistema recebe o pedido do funcionário, valida se essa solicitação possui entradas válidas como a data e hora de ínicio e término devem ser no futuro, a data de início deve ser menor do que a data de término.
+1) O funcionário ao desejar remarcar uma reunião deve informar o identificador da reunião junto com as novas datas de ínicios e término da agenda.
+2) O sistema recebe o pedido do funcionário, valida se essa solicitação possui entradas válidas como a data e hora de ínicio e término devem ser no futuro e a data de início deve ser menor do que a data de término.
 3) O sistema verifica se aquele identificador pertence para alguma reunião cadastrada na base de dados.
-4) O sistema verifica se o funcionário que solicitou a remarcação da reunião é o organizador da mesma.
+4) O sistema verifica se o funcionário que solicitou a remarcação da reunião é o organizador da agenda.
 5) O sistema atualiza as datas da reunião na base de dados.
 6) O sistema redefine para o padrão, NÃO_RESPONDIDO, todas as respostas de presenças dos convidados daquela reunião.
-7) O sistema dispara e-mail para todos os convidados daquela reunião informando a atualização sobre aquela reunião.
-8) O sistema retorna uma resposta bem sucedida para o cliente informando que aquela remarcação dele foi registrada com sucesso.
+7) O sistema dispara e-mail's para todos os convidados daquela reunião informando a atualização sobre aquela agenda.
+8) O sistema retorna uma resposta bem sucedida para o solicitante informando que aquela remarcação foi registrada com sucesso.
+
 Fluxo Alternativo 1:
 Caso o funcionário não informe os dados em uma forma válida, o sistema irá retornar uma resposta de erro com uma mensagem amigável informando como os dados devem ser preenchidos.
 Fluxo Alternativo 2:
-Caso o funcionário informe um identificador que não pertença a nenhuma agenda, o sistema irá retornar uma resposta de erro com uma mensagem amigável relatando que ele informou um identificador que possui relação com nenhuma agenda.
+Caso o funcionário informe um identificador que não pertença a nenhuma agenda, o sistema irá retornar uma resposta de erro com uma mensagem amigável relatando que ele informou um identificador que não possui relação com nenhuma agenda.
 Fluxo Alternativo 3:
-Caso o funcionário tente remarcar uma agenda onde ele não é o organizador da mesma, o sistema irá retornar uma resposta de erro com uma mensagem amigável relatando que ele não possui permissão para remarcar a agenda referenciada pelo identificador informado.
+Caso o funcionário tente remarcar uma agenda onde ele não é o organizador da reunião, o sistema irá retornar uma resposta de erro com uma mensagem amigável relatando que ele não possui permissão para remarcar a reunião referenciada pelo identificador informado.
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Caso de uso: Criar processo seletivo
 Objetivo: Criar um processo seletivo de recrutamento de funcionários para preencher uma determinada posição aberta na empresa.
+
 Pré-condições: O funcionário deve possuir o perfil de recrutador.
-Pós-condição: Os dados do processo seletivo estaram atualizados na base de dados.
+Pós-condição: Os dados do novo processo seletivo estão armazenados na base de dados com status de aberto à inscrições.
+
 Cenário de sucesso principal:
-1) O funcionário com perfil de recrutador ao desejar atualizar um processo seletivo, deve informar o identificador da seleção.
-2) O sistema recebe o pedido do recrutador, valida se essa solicitação possui uma descrição válida, se ela veio preenchida e se contém texto,
+1) O funcionário com perfil de recrutador ao desejar criar um processo seletivo, deve informar a descrição da seleção.
+2) O sistema recebe o pedido do recrutador, valida se essa solicitação possui uma descrição válida, se ela veio preenchida e se contém texto.
 3) O sistema armazena na base de dados o processo seletivo informando que a data de criação da seleção é a data atual, o status do processo está aberto à inscrições e a descrição do processo é a que foi informada pelo recrutador,
 4) O sistema retorna uma resposta bem sucedida para o recrutador informando que aquele processo seletivo foi criado, enviando junto na resposta o identificador que foi gerado para aquela seleção.
+
 Fluxo Alternativo:
 Caso o funcionário não informe os dados em uma forma válida, o sistema irá retornar uma resposta de erro com uma mensagem amigável informando como os dados devem ser preenchidos.
 
@@ -96,36 +111,42 @@ Caso o funcionário não informe os dados em uma forma válida, o sistema irá r
 
 Caso de uso: Atualizar processo seletivo
 Objetivo: Atualizar o status de um processo seletivo de recrutamento de funcionários para preencher uma determinada posição aberta na empresa.
+
 Pré-condições: O funcionário deve possuir o perfil de recrutador e ser o criador do processo seletivo a ser atualizado. O processo seletivo deve existir na base de dados.
-Pós-condição: Os dados do novo processo seletivo estão armazenados na base de dados com status de aberto à inscrições.
+Pós-condição: O status do processo seletivo estar atualizado na base de dados.
+
 Cenário de sucesso principal:
-1) O funcionário com perfil de recrutador ao desejar criar um processo seletivo, deve informar a descrição da seleção,
-2) O sistema recebe o pedido do funcionário, valida se essa solicitação possui entradas válidas como se o identificador está no padrão adequado.
+1) O funcionário com perfil de recrutador ao desejar atualizar um processo seletivo, deve informar o identificador da seleção.
+2) O sistema recebe o pedido do funcionário, valida se essa solicitação possui entradas válidas como se o identificador está no padrão adequado para um processo seletivo.
 3) O sistema verifica se aquele identificador pertence para algum processo seletivo cadastrado na base de dados.
-4) O sistema verifica se o funcionário que solicitou a atualização de status da seleção é o responsável da mesma.
+4) O sistema verifica se o funcionário que solicitou a atualização de status da seleção é o responsável da seleção.
 5) O sistema de acordo com o fluxo de estado, atualiza o status do processo seletivo na base de dados.
 6) O sistema retorna uma resposta bem sucedida para o recrutador informando que aquele processo seletivo foi atualizado.
+
 Fluxo Alternativo 1:
 Caso o recrutador não informe os dados em uma forma válida, o sistema irá retornar uma resposta de erro com uma mensagem amigável informando como os dados devem ser preenchidos.
 Fluxo Alternativo 2:
-Caso o recrutador informe um identificador que não pertença a nenhum processo seletivo, o sistema irá retornar uma resposta de erro com uma mensagem amigável relatando que ele informou um identificador que possui relação com nenhuma seleção.
+Caso o recrutador informe um identificador que não pertença a nenhum processo seletivo, o sistema irá retornar uma resposta de erro com uma mensagem amigável relatando que ele informou um identificador que não possui relação com nenhuma seleção.
 Fluxo Alternativo 3:
 Caso o recrutador tente atualizar um processo seletivo onde ele não é o responsável do mesmo, o sistema irá retornar uma resposta de erro com uma mensagem amigável relatando que ele não possui permissão para atualizar a seleção referenciada pelo identificador informado.
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Caso de uso: Candidatar-se ao processo seletivo
-Objetivo: Um candidato pode efetuar a sua inscrição em um processo seletivo aberto.
-Pré-condições: O usuário cadastrado no sistema deve ser um candidato. O processo seletivo deve existir na base de dados e estar no status de ABERTO.
+Objetivo: Um candidato pode efetuar a sua inscrição em um processo seletivo aberto à inscrições.
+
+Pré-condições: O usuário cadastrado no sistema deve ser um candidato. O processo seletivo deve existir na base de dados e estar no status de que permite inscrições.
 Pós-condição: A nova candidatura deve ser armazenada na base de dados.
+
 Cenário de sucesso principal:
 1) O candidato ao desejar se inscrever para um processo seletivo, deve informar a identificação do processo seletivo junto com o upload do seu currículo no formato PDF.
-2) O sistema recebe a solicitação do candidato, valida se essa solicitação possui entradas válidas como se o identificador está no padrão adequado e se ele realizou o upload de um anexo em formato PDF.
+2) O sistema recebe a solicitação do candidato, valida se essa solicitação possui entradas válidas como se o identificador está no padrão adequado para uma candidatura e se ele realizou o upload de um anexo em formato PDF.
 3) O sistema verifica se aquele identificador pertence para algum processo seletivo cadastrado na base de dados.
 4) O sistema verifica se aquele processo seletivo ainda está aberto à inscrições.
 5) O sistema armazena na base de dados a candidatura do candidato.
-6) O sistema envia um email para o candidato e para o responsável pelo processo seletivo informando sobre a candidatura realizada.
+6) O sistema envia um email para o candidato e para o responsável pelo processo seletivo informando sobre a candidatura realizada para o processo seletivo referenciado no identificador.
 7) O sistema retorna uma resposta bem sucedida para o candidato informando que aquela candidatura foi efetuada, retornando para o candidato o identificador gerado para aquela candidatura.
+
 Fluxo Alternativo 1:
 Caso o candidato não informe os dados em uma forma válida, o sistema irá retornar uma resposta de erro com uma mensagem amigável informando como os dados devem ser preenchidos.
 Fluxo Alternativo 2:
@@ -137,20 +158,23 @@ Caso o candidato informe um identificador que pertença a processo seletivo que 
 
 Caso de uso: Encerrar candidatura
 Objetivo: Um candidato ou um funcionário pode encerrar uma candidatura em um processo seletivo.
+
 Pré-condições: O usuário cadastrado no sistema deve ser um candidato, ou um funcionário com perfil de recrutador. A candidatura deve existir na base de dados, o candidato deve ser o dono da candidatura e o rerutador deve ser o responsável pelo processo seletivo.
 Pós-condição: O cancelamento da candidatura deve ser armazenada na base de dados.
+
 Cenário de sucesso principal:
 1) O candidato ou recrutador ao desejar cancelar uma candidatura para um processo seletivo, deve informar a identificação da candidatura.
-2) O sistema recebe a solicitação do candidato/recrutador, valida se essa solicitação possui entradas válidas como se o identificador está no padrão adequado.
+2) O sistema recebe a solicitação do candidato/recrutador, valida se essa solicitação possui entradas válidas como se o identificador está no padrão adequado para uma candidatura.
 3) O sistema verifica se aquele identificador pertence para alguma candidatura cadastrada na base de dados.
-4) O sistema verifica se aquela o responsável por cancelar a candidatura a o dono da candidatura ou é o responsável pelo processo seletivo da qual a candidatura está relacionada.
+4) O sistema verifica se aquele o responsável por cancelar a candidatura é o dono da candidatura ou é o responsável pelo processo seletivo da qual a candidatura está relacionada.
 5) O sistema atualiza o status da candidatura na base de dados.
-6) O sistema envia um email para o candidato e para o responsável pelo processo seletivo informando sobre a atualização da candidatura.
+6) O sistema envia um email para o candidato e para o responsável pelo processo seletivo informando sobre o encerramento da candidatura.
 7) O sistema retorna uma resposta bem sucedida para o candidato/recrutador informando que aquela candidatura foi cancelada.
+
 Fluxo Alternativo 1:
 Caso o candidato/recrutador não informe os dados em uma forma válida, o sistema irá retornar uma resposta de erro com uma mensagem amigável informando como os dados devem ser preenchidos.
 Fluxo Alternativo 2:
-Caso o candidato/recrutador informe um identificador que não pertença a nenhuma candidatura, o sistema irá retornar uma resposta de erro com uma mensagem amigável relatando que ele informou um identificador que possui relação com nenhuma candidatura.
+Caso o candidato/recrutador informe um identificador que não pertença a nenhuma candidatura, o sistema irá retornar uma resposta de erro com uma mensagem amigável relatando que ele informou um identificador que não possui relação com nenhuma candidatura.
 Fluxo Alternativo 3:
 Caso o candidato/recrutador informe um identificador que pertença a uam candidatura onde ele não é o dono da candidatura ou ele não é o responsável do processo seletivo, o sistema irá retornar uma resposta de erro com uma mensagem amigável relatando que ele tentou executar uma ação não permitida.
 
@@ -158,13 +182,16 @@ Caso o candidato/recrutador informe um identificador que pertença a uam candida
 
 Caso de uso: Registrar funcionário
 Objetivo: Um administrador pode registrar um novo funcionário no sistema.
+
 Pré-condições: O usuário cadastrado no sistema deve ser um administrador.
 Pós-condição: O novo funcionário deve ser armazenado na base de dados.
+
 Cenário de sucesso principal:
 1) O administrador ao desejar criar um novo funcionário, deve informar o nome, o cpf, o email, os telefones, a data de nascimento, o endereço, o cargo, o salário, a data de contratação, a escala de trabalho, o código de acesso, a senha e o perfis de acesso para o novo funcionário.
 2) O sistema recebe a solicitação do administrador e valida se essa solicitação possui entradas válidas.
 3) O sistema armazena o novo funcionário na base de dados.
 4) O sistema retorna uma resposta bem sucedida para o administrador informando que aquele funcionário foi cadastrado, retornando o identificador gerado para o novo funcionário.
+
 Fluxo Alternativo 1:
 Caso o administrador não informe os dados em uma forma válida, o sistema irá retornar uma resposta de erro com uma mensagem amigável informando como os dados devem ser preenchidos.
 
@@ -172,13 +199,16 @@ Caso o administrador não informe os dados em uma forma válida, o sistema irá 
 
 Caso de uso: Efetuar cadastro
 Objetivo: Um usuário não cadastrado pode criar um cadastro de candidato no sistema.
-Pré-condições: N/A.
+
+Pré-condições: Deve ser um usuário anônimo.
 Pós-condição: O novo candidato deve ser armazenado na base de dados.
+
 Cenário de sucesso principal:
 1) O usuário ao desejar criar um cadastro seu, deve informar o nome, o cpf, o email, os telefones, a data de nascimento, o endereço, o código de acesso e a senha para o novo castrado.
-2) O sistema recebe a solicitação do usupario e valida se essa solicitação possui entradas válidas.
+2) O sistema recebe a solicitação do usuário e valida se essa solicitação possui entradas válidas.
 3) O sistema armazena o novo cadastro na base de dados.
 4) O sistema retorna uma resposta bem sucedida para o usuário informando que aquele cadastrado foi efetuado.
+
 Fluxo Alternativo 1:
 Caso o usuário não informe os dados em uma forma válida, o sistema irá retornar uma resposta de erro com uma mensagem amigável informando como os dados devem ser preenchidos.
 
@@ -186,14 +216,17 @@ Caso o usuário não informe os dados em uma forma válida, o sistema irá retor
 
 Caso de uso: Efetuar login
 Objetivo: Um usuário não identificado pode efetuar login no sistema.
+
 Pré-condições: Possuir um cadastro válido para as credenciais informadas.
 Pós-condição: É retornado um "cartão de acesso" para o usuário que acabou de efetuar login.
+
 Cenário de sucesso principal:
 1) O usuário ao desejar efetuar login deve informar o código de acesso, a senha, os perfis de acesso e se o login que ele irá fazer é para um perfil de funcionário ou para um perfil de candidato.
 2) O sistema recebe a solicitação do usuário e valida se essa solicitação possui entradas válidas.
 3) O sistema efetua a autenticação do usuário baseado nas credenciais e no tipo de login que ele deseja fazer.
 4) O sistema gera um "cartão de acesso" para esse usuário contendo os perfis de acesso desejados pelo o usuário.
 4) O sistema retorna uma resposta bem sucedida para o usuário informando que aquele login foi efetuado com sucesso e retonando o cartão de acesso para usuário.
+
 Fluxo Alternativo 1:
 Caso o usuário não informe os dados em uma forma válida, o sistema irá retornar uma resposta de erro com uma mensagem amigável informando como os dados devem ser preenchidos.
 Fluxo Alternativo 2:
